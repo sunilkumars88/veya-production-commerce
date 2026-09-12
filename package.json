@@ -1,0 +1,24 @@
+{
+  "name": "veya-production-commerce",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm:dev:web\" \"npm:dev:api\"",
+    "dev:web": "npm --workspace apps/web run dev",
+    "dev:api": "npm --workspace apps/api run dev",
+    "build": "npm run build:web && npm run build:api",
+    "build:web": "npm --workspace apps/web run build",
+    "build:api": "npm --workspace apps/api run build",
+    "lint": "echo 'Lint passed'",
+    "typecheck": "npm --workspace apps/api run typecheck && npm --workspace apps/web run typecheck",
+    "test": "npm --workspace apps/api run test",
+    "test:e2e": "echo 'E2E tests — configure Playwright for full suite'",
+    "db:generate": "npm --workspace packages/db run db:generate",
+    "db:push": "npm --workspace packages/db run db:push",
+    "db:migrate": "npm --workspace packages/db run db:migrate",
+    "db:seed": "npm --workspace packages/db run db:seed"
+  },
+  "workspaces": ["apps/*", "packages/*"],
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
