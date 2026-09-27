@@ -21,7 +21,7 @@ export default function SupplierPage() {
   return (
     <main className="min-h-screen bg-[#f4efe9]">
       <header className="bg-white border-b border-black/10 px-6 py-6">
-        <h1 className="font-serif text-3xl md:text-4xl">Supplier fulfilment</h1>
+        <h1 className="text-3xl md:text-4xl font-bold">Supplier fulfilment</h1>
         <p className="text-black/50 mt-1 text-sm">Accept → pack → ship under private-label rules.</p>
       </header>
 
@@ -53,7 +53,7 @@ export default function SupplierPage() {
             <div className="flex gap-2">
               {x.status === 'PENDING' && <button onClick={() => act(x.id, 'accept')} className="bg-black text-white px-4 py-2 rounded-full text-sm">Accept</button>}
               {x.status === 'ACCEPTED' && <button onClick={() => act(x.id, 'packed')} className="bg-black text-white px-4 py-2 rounded-full text-sm flex items-center gap-1"><PackageCheck size={16} /> Packed</button>}
-              {x.status === 'PACKED' && <button onClick={() => act(x.id, 'shipped', { trackingNumber: `TRK-${Date.now()}`, carrier: 'Veya Express' })} className="bg-black text-white px-4 py-2 rounded-full text-sm flex items-center gap-1"><Truck size={16} /> Ship</button>}
+              {x.status === 'PACKED' && <button onClick={() => act(x.id, 'shipped', { trackingNumber: `TRK-${Date.now()}`, carrier: 'SakhiKart Express' })} className="bg-teal text-white px-4 py-2 rounded-full text-sm flex items-center gap-1"><Truck size={16} /> Ship</button>}
             </div>
           </div>
         ))}

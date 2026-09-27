@@ -22,54 +22,53 @@ export default function CartDrawer({ open, onClose }: { open: boolean; onClose: 
     <AnimatePresence>
       {open && (
         <>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/40 z-50" onClick={onClose} />
-          <motion.aside initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 30 }} className="fixed right-0 top-0 bottom-0 z-50 w-full sm:w-[430px] bg-white shadow-2xl flex flex-col">
-            <div className="p-6 flex justify-between items-center border-b border-black/10">
-              <h2 className="font-serif text-2xl md:text-3xl">Your bag</h2>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-[#0D1E1C]/40 z-50" onClick={onClose} />
+          <motion.aside initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 32 }} className="fixed right-0 top-0 bottom-0 z-50 w-full sm:w-[430px] bg-white shadow-2xl flex flex-col">
+            <div className="p-6 flex justify-between items-center border-b border-black/5">
+              <h2 className="text-2xl font-bold">Your cart</h2>
               <button onClick={onClose} aria-label="Close"><X size={22} /></button>
             </div>
-
             {toFree > 0 && items.length > 0 && (
-              <div className="px-6 py-3 bg-[#f8f4ee] text-sm text-center">
+              <div className="px-6 py-3 bg-mint text-sm text-center text-ink">
                 You are <strong>₹{toFree}</strong> away from <strong>FREE SHIPPING</strong>
                 <div className="mt-2 h-1.5 bg-black/10 rounded-full overflow-hidden">
-                  <div className="h-full bg-[#d76d6d] rounded-full transition-all" style={{ width: `${Math.min(100, (total / freeThreshold) * 100)}%` }} />
+                  <div className="h-full bg-teal rounded-full" style={{ width: `${Math.min(100, (total / freeThreshold) * 100)}%` }} />
                 </div>
               </div>
             )}
-
             <div className="flex-1 overflow-y-auto px-6 py-4">
               {items.length === 0 ? (
-                <div className="text-center py-16 text-black/40">
-                  <p className="text-lg">Your bag is waiting.</p>
-                  <button onClick={onClose} className="mt-4 text-sm underline">Continue shopping</button>
+                <div className="text-center py-16 text-ink-mute">
+                  <p className="text-lg">Your cart is empty.</p>
+                  <button onClick={onClose} className="mt-4 text-sm text-teal underline">Continue shopping</button>
                 </div>
               ) : items.map(item => (
-                <div key={item.variantId} className="py-4 border-b border-black/10 flex gap-4">
-                  <div className="w-20 h-24 rounded-xl bg-gradient-to-br from-[#eadbd2] to-[#c9b2a6] flex-shrink-0" />
+                <div key={item.variantId} className="py-4 border-b border-black/5 flex gap-4">
+                  <div className="w-20 h-24 rounded-xl bg-mint flex-shrink-0 overflow-hidden">
+                    {item.image && <img src={item.image} alt="" className="w-full h-full object-cover" />}
+                  </div>
                   <div className="flex-1">
                     <p className="font-medium text-sm">{item.title}</p>
-                    <p className="text-xs text-black/50 mt-1">{item.size} · {item.color}</p>
-                    <p className="mt-2 text-sm">₹{item.price.toLocaleString('en-IN')}</p>
+                    <p className="text-xs text-ink-mute mt-1">{item.size} · {item.color}</p>
+                    <p className="mt-2 text-sm font-semibold">₹{item.price.toLocaleString('en-IN')}</p>
                     <div className="flex items-center gap-3 mt-2">
-                      <button onClick={() => setItems(updateQty(item.variantId, item.qty - 1))} className="w-7 h-7 rounded-full border border-black/20 flex items-center justify-center"><Minus size={12} /></button>
+                      <button onClick={() => setItems(updateQty(item.variantId, item.qty - 1))} className="w-7 h-7 rounded-full border border-black/15 flex items-center justify-center"><Minus size={12} /></button>
                       <span className="text-sm">{item.qty}</span>
-                      <button onClick={() => setItems(updateQty(item.variantId, item.qty + 1))} className="w-7 h-7 rounded-full border border-black/20 flex items-center justify-center"><Plus size={12} /></button>
-                      <button onClick={() => setItems(removeFromCart(item.variantId))} className="text-xs text-black/40 ml-auto underline">Remove</button>
+                      <button onClick={() => setItems(updateQty(item.variantId, item.qty + 1))} className="w-7 h-7 rounded-full border border-black/15 flex items-center justify-center"><Plus size={12} /></button>
+                      <button onClick={() => setItems(removeFromCart(item.variantId))} className="text-xs text-ink-mute ml-auto underline">Remove</button>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-
             {items.length > 0 && (
-              <div className="p-6 border-t border-black/10">
+              <div className="p-6 border-t border-black/5">
                 <div className="flex justify-between mb-4 text-sm">
                   <span>Subtotal</span>
-                  <span className="font-medium">₹{total.toLocaleString('en-IN')}</span>
+                  <span className="font-semibold">₹{total.toLocaleString('en-IN')}</span>
                 </div>
-                <Link href="/checkout" onClick={onClose} className="block w-full bg-black text-white py-4 rounded-full text-center text-sm font-medium">
-                  Proceed to checkout · ₹{total.toLocaleString('en-IN')}
+                <Link href="/checkout" onClick={onClose} className="block w-full bg-teal text-white py-4 rounded-full text-center text-sm font-semibold shadow-glow">
+                  Checkout · ₹{total.toLocaleString('en-IN')}
                 </Link>
               </div>
             )}

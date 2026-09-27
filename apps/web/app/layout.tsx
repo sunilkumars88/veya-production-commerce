@@ -2,9 +2,13 @@ import './globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Veya — Everyday Comfort, Elevated',
-  description: 'Premium comfortwear and innerwear designed for repeat everyday wear. Shop bras, panties, period care, activewear and more.',
-  openGraph: { title: 'Veya — Everyday Comfort, Elevated', description: 'Premium comfortwear and innerwear', type: 'website' },
+  title: 'SakhiKart — Shop Innerwear, Period Care, Baby & Wellness',
+  description: 'India’s essentials marketplace for innerwear, period care, hygiene, baby and wellness. COD and Razorpay ready. Dropship fulfilment. Sell with us soon.',
+  openGraph: {
+    title: 'SakhiKart — India’s essentials marketplace',
+    description: 'Innerwear, period care, baby, hygiene and wellness. One cart, pan-India delivery.',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -12,9 +16,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-[Inter,sans-serif] antialiased">{children}</body>
+      <body className="relative antialiased">{children}</body>
     </html>
   );
 }

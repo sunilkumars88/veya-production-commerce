@@ -25,7 +25,7 @@ export async function createCheckout(input: CheckoutInput, paymentProvider: Paym
     if (pricing.total > codMax) throw new AppError('PAYMENT_FAILED', `COD max ₹${codMax}`);
   }
 
-  const orderNumber = `VEYA-${Date.now()}`;
+  const orderNumber = `SK-${Date.now()}`;
   const ttlMinutes = await getSettingInt('reservation_ttl_minutes', 30);
   const expiresAt = new Date(Date.now() + ttlMinutes * 60_000);
 

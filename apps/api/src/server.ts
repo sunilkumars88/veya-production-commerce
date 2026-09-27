@@ -38,7 +38,7 @@ app.use((req, res, next) => {
 app.use(express.json({ verify: (req: any, _res, buf) => { req.rawBody = buf; } }));
 
 // Health
-app.get('/health', (_q, r) => r.json({ ok: true, service: 'veya-api', version: '1.0.0' }));
+app.get('/health', (_q, r) => r.json({ ok: true, service: 'sakhikart-api', version: '1.0.0' }));
 app.get('/ready', async (_q, r) => {
   try {
     await db.$queryRaw`SELECT 1`;
@@ -87,7 +87,7 @@ app.use((err: any, req: any, res: any, _next: any) => {
 setInterval(() => expireStaleReservations().catch(console.error), 5 * 60_000);
 
 app.listen(config.apiPort, () => {
-  console.log(`VEYA API running on :${config.apiPort}`);
+  console.log(`SakhiKart API running on :${config.apiPort}`);
   console.log(`Payment: ${config.razorpay.enabled ? 'Razorpay' : 'Mock'}`);
   console.log(`Shipping: ${config.shipping.provider}`);
 });

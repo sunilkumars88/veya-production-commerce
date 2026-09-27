@@ -1,13 +1,24 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Truck, ShieldCheck, Heart, Sparkles, ChevronDown } from 'lucide-react';
+import { ArrowRight, Truck, ShieldCheck, Store, Sparkles, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 import CartDrawer from '../components/CartDrawer';
 import { api } from '../lib/api';
+
+const CATEGORIES = [
+  { name: 'Bras', slug: 'bras', color: 'from-[#7BBFB5] to-[#1A7A6E]' },
+  { name: 'Panties', slug: 'panties', color: 'from-[#A8D4CE] to-[#2A9D8F]' },
+  { name: 'Period', slug: 'period-wear', color: 'from-[#C5B4D3] to-[#7A6B8C]' },
+  { name: 'Hygiene', slug: 'intimate-hygiene', color: 'from-[#9EC9C2] to-[#3A7A72]' },
+  { name: 'Baby', slug: 'baby-kids', color: 'from-[#F0D9B5] to-[#C9A36A]' },
+  { name: 'Wellness', slug: 'wellness', color: 'from-[#B7D4C5] to-[#4A8B73]' },
+  { name: 'Active', slug: 'activewear', color: 'from-[#8FB8C9] to-[#3A6B7A]' },
+  { name: 'Maternity', slug: 'maternity', color: 'from-[#E8C4C4] to-[#B07A7A]' },
+];
 
 export default function Home() {
   const [data, setData] = useState<any>(null);
@@ -16,96 +27,106 @@ export default function Home() {
 
   useEffect(() => { api.getHomepage().then(setData).catch(console.error); }, []);
 
-  const categories = [
-    { name: 'Bras', slug: 'bras', color: 'from-[#d8b9ac] to-[#c9a090]' },
-    { name: 'Panties', slug: 'panties', color: 'from-[#b99a8e] to-[#a08070]' },
-    { name: 'Period', slug: 'period', color: 'from-[#c4a0a0] to-[#b08080]' },
-    { name: 'Activewear', slug: 'activewear', color: 'from-[#a0b0a0] to-[#809080]' },
-    { name: 'Nightwear', slug: 'nightwear', color: 'from-[#a0a0c0] to-[#8080a0]' },
-    { name: 'Girls', slug: 'girls', color: 'from-[#d0c0a0] to-[#c0b090]' },
-  ];
-
   return (
     <>
       <Header onCartOpen={() => setCartOpen(true)} />
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
 
-      {/* Hero */}
-      <section className="px-4 md:px-14 py-10 md:py-20 grid lg:grid-cols-2 gap-8 items-center min-h-[70vh] max-w-[1440px] mx-auto">
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-          <p className="uppercase tracking-[.3em] text-xs text-black/50">The everyday edit</p>
-          <h1 className="font-serif text-[3rem] md:text-[5.5rem] lg:text-[7rem] leading-[.88] mt-4">Comfort<br /><i>that moves.</i></h1>
-          <p className="text-base md:text-lg text-black/55 max-w-lg mt-6">Premium essentials designed around real bodies, real routines and repeat wear.</p>
+      <section className="px-4 md:px-10 py-12 md:py-20 max-w-[1280px] mx-auto grid lg:grid-cols-2 gap-10 items-center min-h-[72vh]">
+        <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
+          <span className="pill mb-5">India’s essentials marketplace</span>
+          <h1 className="text-[2.6rem] md:text-[4.6rem] font-bold leading-[1.05] tracking-tight mt-5">
+            Shop everything<br /><em className="font-serif text-teal italic font-semibold">she actually needs.</em>
+          </h1>
+          <p className="text-base md:text-lg text-ink-mute max-w-lg mt-6 leading-relaxed">
+            Innerwear, period care, intimate hygiene, baby, and wellness — one cart, COD or Razorpay, dropship from partner warehouses.
+          </p>
           <div className="flex flex-wrap gap-3 mt-8">
-            <Link href="/collections/best-sellers" className="bg-black text-white px-6 md:px-7 py-3.5 md:py-4 rounded-full inline-flex items-center gap-3 text-sm">Shop collection <ArrowRight size={16} /></Link>
-            <Link href="#story" className="border border-black/20 px-6 md:px-7 py-3.5 md:py-4 rounded-full text-sm">Discover Veya</Link>
+            <Link href="/collections/best-sellers" className="bg-teal text-white px-7 py-3.5 rounded-full inline-flex items-center gap-2 text-sm font-semibold shadow-glow">
+              Shop now <ArrowRight size={16} />
+            </Link>
+            <Link href="/sell" className="border border-teal/30 px-7 py-3.5 rounded-full text-sm font-medium text-teal hover:bg-teal/10">Sell on SakhiKart</Link>
+          </div>
+          <div className="flex flex-wrap gap-5 mt-8 text-xs text-ink-mute">
+            <span className="inline-flex items-center gap-1.5"><ShieldCheck size={14} /> Razorpay + COD</span>
+            <span className="inline-flex items-center gap-1.5"><Truck size={14} /> 3–5 day delivery</span>
+            <span className="inline-flex items-center gap-1.5"><Store size={14} /> Vendor-ready</span>
           </div>
         </motion.div>
-        <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="h-[50vh] md:h-[62vh] rounded-[2rem] md:rounded-[2.5rem] bg-gradient-to-br from-[#d8b9ac] via-[#eee1d9] to-[#b99a8e] relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_30%,rgba(255,255,255,.85),transparent_35%)]" />
-          <div className="absolute bottom-6 md:bottom-8 left-6 md:left-8 text-white">
-            <p className="tracking-[.25em] text-[10px] md:text-xs uppercase">Soft. Strong. Yours.</p>
-            <p className="font-serif text-2xl md:text-4xl mt-2">Made for everyday.</p>
-          </div>
+        <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className="relative h-[48vh] md:h-[58vh] rounded-[28px] overflow-hidden bg-gradient-to-br from-[#2A9D8F] via-[#1A7A6E] to-[#0D3D38] shadow-silk">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(255,255,255,.28),transparent_42%)]" />
+          <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }} className="absolute bottom-8 left-8 right-8 text-white">
+            <p className="text-[11px] tracking-[.22em] uppercase text-white/70">Flipkart-style range · Calm Clearwave look</p>
+            <p className="font-serif italic text-3xl md:text-5xl mt-2">One marketplace. Many homes.</p>
+          </motion.div>
         </motion.div>
       </section>
 
-      {/* Shop by category */}
-      <section className="px-4 md:px-14 py-16 max-w-[1440px] mx-auto">
-        <p className="uppercase tracking-[.25em] text-xs text-black/50">Shop by category</p>
-        <h2 className="font-serif text-3xl md:text-5xl mt-3 mb-8">Find your fit.</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
-          {categories.map((c, i) => (
+      <section className="px-4 md:px-10 py-8 max-w-[1280px] mx-auto">
+        <p className="pill">Shop by category</p>
+        <h2 className="text-3xl md:text-5xl font-bold tracking-tight mt-4 mb-8">Find it fast.</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          {CATEGORIES.map((c, i) => (
             <Link key={c.slug} href={`/category/${c.slug}`}>
-              <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className={`aspect-square rounded-2xl bg-gradient-to-br ${c.color} flex items-end p-4 hover:scale-[1.02] transition-transform`}>
-                <span className="text-white font-medium text-sm md:text-base">{c.name}</span>
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -4 }}
+                transition={{ delay: i * 0.04 }}
+                className={`aspect-[5/4] rounded-2xl bg-gradient-to-br ${c.color} flex items-end p-4 shadow-sm`}
+              >
+                <span className="text-white font-semibold">{c.name}</span>
               </motion.div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* Best sellers */}
       {data?.bestSellers?.length > 0 && (
-        <section className="px-4 md:px-14 py-16 max-w-[1440px] mx-auto">
+        <section className="px-4 md:px-10 py-16 max-w-[1280px] mx-auto">
           <div className="flex justify-between items-end mb-8">
-            <div><p className="uppercase tracking-[.25em] text-xs text-black/50">Trending</p><h2 className="font-serif text-3xl md:text-5xl mt-3">Best sellers</h2></div>
-            <Link href="/collections/best-sellers" className="text-sm text-black/50 hover:text-black">View all →</Link>
+            <div>
+              <p className="pill">Trending</p>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mt-4">Best sellers</h2>
+            </div>
+            <Link href="/collections/best-sellers" className="text-sm text-teal font-medium">View all →</Link>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-5 md:gap-y-12">
-            {data.bestSellers.slice(0, 4).map((p: any, i: number) => <ProductCard key={p.id} product={p} index={i} />)}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10">
+            {data.bestSellers.slice(0, 8).map((p: any, i: number) => <ProductCard key={p.id} product={p} index={i} />)}
           </div>
         </section>
       )}
 
-      {/* New arrivals */}
       {data?.newArrivals?.length > 0 && (
-        <section className="px-4 md:px-14 py-16 max-w-[1440px] mx-auto">
+        <section className="px-4 md:px-10 py-8 max-w-[1280px] mx-auto">
           <div className="flex justify-between items-end mb-8">
-            <div><p className="uppercase tracking-[.25em] text-xs text-black/50">Just dropped</p><h2 className="font-serif text-3xl md:text-5xl mt-3">New arrivals</h2></div>
-            <Link href="/collections/new-arrivals" className="text-sm text-black/50 hover:text-black">View all →</Link>
+            <div>
+              <p className="pill">Just in</p>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mt-4">New arrivals</h2>
+            </div>
+            <Link href="/collections/new-arrivals" className="text-sm text-teal font-medium">View all →</Link>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-5 md:gap-y-12">
-            {data.newArrivals.slice(0, 4).map((p: any, i: number) => <ProductCard key={p.id} product={p} index={i} />)}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10">
+            {data.newArrivals.slice(0, 8).map((p: any, i: number) => <ProductCard key={p.id} product={p} index={i} />)}
           </div>
         </section>
       )}
 
-      {/* Story */}
-      <section id="story" className="bg-black text-white px-4 md:px-14 py-20 md:py-28">
-        <div className="max-w-[1440px] mx-auto grid lg:grid-cols-2 gap-12 md:gap-16">
+      <section className="bg-[#0D1E1C] text-white mx-4 md:mx-10 rounded-[28px] px-6 md:px-14 py-16 md:py-20 max-w-[1280px] md:mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12">
           <div>
-            <p className="text-white/40 uppercase tracking-[.25em] text-xs">The Veya standard</p>
-            <h2 className="font-serif text-4xl md:text-6xl lg:text-8xl mt-4">Less fuss.<br /><i>More feeling.</i></h2>
+            <p className="text-teal-light text-xs tracking-[.2em] uppercase">Built like a marketplace</p>
+            <h2 className="text-4xl md:text-6xl font-bold mt-4 leading-tight">Less fuss.<br /><em className="font-serif italic text-teal-light font-semibold">More feeling.</em></h2>
           </div>
           <div className="flex flex-col justify-end">
-            <p className="text-lg md:text-2xl text-white/65 max-w-xl">A commerce system built around comfort, transparency and a better after-purchase experience — from supplier to doorstep.</p>
-            <div className="grid grid-cols-3 gap-4 mt-10 md:mt-12">
-              {[['Fit', 'Thoughtful cuts'], ['Care', 'Easy exchange'], ['Flow', 'Fast fulfilment']].map(([a, b]) => (
-                <div className="border-t border-white/20 pt-4" key={a}>
-                  <Sparkles size={17} />
-                  <p className="mt-3 md:mt-4 text-sm md:text-base">{a}</p>
-                  <p className="text-xs md:text-sm text-white/40 mt-1">{b}</p>
+            <p className="text-lg text-white/65 max-w-xl">One storefront, many suppliers, ready for vendors. Payments, COD, inventory reservation and blind shipping already wired.</p>
+            <div className="grid grid-cols-3 gap-4 mt-10">
+              {[['Cart', 'One checkout'], ['Dropship', 'Partner SLAs'], ['Vendors', 'Coming next']].map(([a, b]) => (
+                <div className="border-t border-white/15 pt-4" key={a}>
+                  <Sparkles size={16} className="text-teal-light" />
+                  <p className="mt-3 font-medium">{a}</p>
+                  <p className="text-sm text-white/40 mt-1">{b}</p>
                 </div>
               ))}
             </div>
@@ -113,51 +134,47 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Benefits */}
-      <section className="px-4 md:px-14 py-16 max-w-[1440px] mx-auto grid md:grid-cols-3 gap-4 md:gap-5">
-        {[[Truck, 'Fast delivery', 'Track every shipment'], [ShieldCheck, 'Secure payments', 'Razorpay protected'], [Heart, 'Human support', 'Care after checkout']].map(([I, a, b]: any) => (
-          <div className="bg-white rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-8" key={a}>
-            <I size={24} />
-            <h3 className="text-lg md:text-xl mt-6 md:mt-8">{a}</h3>
-            <p className="text-black/50 mt-2 text-sm">{b}</p>
+      <section className="px-4 md:px-10 py-16 max-w-[1280px] mx-auto grid md:grid-cols-3 gap-4">
+        {[[Truck, 'Fast delivery', 'Track every shipment'], [ShieldCheck, 'Secure payments', 'Razorpay + COD'], [Store, 'Supplier network', 'Blind-ship private label']].map(([I, a, b]: any) => (
+          <div className="bg-white rounded-3xl p-8 shadow-sm" key={a}>
+            <I className="text-teal" />
+            <h3 className="text-xl font-semibold mt-6">{a}</h3>
+            <p className="text-ink-mute mt-2 text-sm">{b}</p>
           </div>
         ))}
       </section>
 
-      {/* Reviews */}
       {data?.reviews?.length > 0 && (
-        <section className="px-4 md:px-14 py-16 max-w-[1440px] mx-auto">
-          <p className="uppercase tracking-[.25em] text-xs text-black/50">Real voices</p>
-          <h2 className="font-serif text-3xl md:text-5xl mt-3 mb-8">What customers say</h2>
+        <section className="px-4 md:px-10 py-8 max-w-[1280px] mx-auto">
+          <p className="pill">Social proof</p>
+          <h2 className="text-3xl md:text-5xl font-bold mt-4 mb-8">What customers say</h2>
           <div className="grid md:grid-cols-3 gap-4">
             {data.reviews.slice(0, 3).map((r: any) => (
-              <div key={r.id} className="bg-white rounded-2xl p-6">
-                <div className="flex gap-1 mb-3">{Array.from({ length: r.rating }).map((_, i) => <span key={i} className="text-[#d76d6d]">★</span>)}</div>
-                <p className="font-medium">{r.title}</p>
-                <p className="text-sm text-black/60 mt-2">{r.body}</p>
-                <p className="text-xs text-black/40 mt-4">{r.user?.name || 'Customer'} · {r.product?.title}</p>
+              <div key={r.id} className="bg-white rounded-2xl p-6 shadow-sm">
+                <div className="flex gap-1 mb-3 text-teal">{'★'.repeat(r.rating)}</div>
+                <p className="font-semibold">{r.title}</p>
+                <p className="text-sm text-ink-mute mt-2">{r.body}</p>
+                <p className="text-xs text-ink-mute/70 mt-4">{r.user?.name || 'Customer'} · {r.product?.title}</p>
               </div>
             ))}
           </div>
         </section>
       )}
 
-      {/* FAQ */}
       {data?.faqs?.length > 0 && (
-        <section className="px-4 md:px-14 py-16 max-w-[800px] mx-auto">
-          <h2 className="font-serif text-3xl md:text-5xl text-center mb-8">Questions?</h2>
+        <section className="px-4 md:px-10 py-16 max-w-[760px] mx-auto">
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-8">Questions?</h2>
           {data.faqs.map((f: any, i: number) => (
             <div key={f.id} className="border-b border-black/10">
               <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full py-5 flex justify-between items-center text-left">
-                <span className="font-medium text-sm md:text-base pr-4">{f.question}</span>
-                <ChevronDown size={18} className={`transition-transform flex-shrink-0 ${openFaq === i ? 'rotate-180' : ''}`} />
+                <span className="font-medium pr-4">{f.question}</span>
+                <ChevronDown size={18} className={`transition-transform ${openFaq === i ? 'rotate-180' : ''}`} />
               </button>
-              {openFaq === i && <p className="pb-5 text-sm text-black/60 leading-relaxed">{f.answer}</p>}
+              {openFaq === i && <p className="pb-5 text-sm text-ink-mute leading-relaxed">{f.answer}</p>}
             </div>
           ))}
         </section>
       )}
-
       <Footer />
     </>
   );

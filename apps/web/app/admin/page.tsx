@@ -26,8 +26,8 @@ export default function AdminPage() {
     <main className="min-h-screen bg-slate-950 text-white">
       <header className="border-b border-white/10 px-6 py-4 flex justify-between items-center">
         <div>
-          <p className="text-xs text-white/40 tracking-[.2em]">VEYA COMMERCE OS</p>
-          <h1 className="text-2xl mt-1">Operations Dashboard</h1>
+          <p className="text-xs text-white/40 tracking-[.2em]">SAKHIKART COMMERCE OS</p>
+          <h1 className="text-2xl mt-1">Marketplace operations</h1>
         </div>
         <button onClick={load} className="border border-white/20 rounded-xl p-3 hover:bg-white/5"><RefreshCw size={18} /></button>
       </header>

@@ -10,7 +10,15 @@ router.get('/', async (req, res) => {
   try {
     const { category, collection, page = '1', limit = '24', sort } = req.query;
     const where: any = { active: true };
-    if (category) where.category = { slug: String(category) };
+    if (category) {
+      const cat = await db.category.findUnique({ where: { slug: String(category) }, include: { children: true } });
+      if (cat) {
+        const slugs = [cat.slug, ...cat.children.map(c => c.slug)];
+        where.category = { slug: { in: slugs } };
+      } else {
+        where.category = { slug: String(category) };
+      }
+    }
     if (collection) where.collections = { some: { collection: { slug: String(collection) } } };
 
     const orderBy: any = { createdAt: 'desc' };
