@@ -1,13 +1,18 @@
 import './globals.css';
 import type { Metadata } from 'next';
 
+const TITLE = 'Body, Baby, Bloom';
+const TAGLINE = 'She changes. Baby grows. You still bloom.';
+
 export const metadata: Metadata = {
-  title: 'SakhiKart — Shop Innerwear, Period Care, Baby & Wellness',
-  description: 'India’s essentials marketplace for innerwear, period care, hygiene, baby and wellness. COD and Razorpay ready. Dropship fulfilment. Sell with us soon.',
+  title: `${TITLE} — ${TAGLINE}`,
+  description: `${TAGLINE} Shop innerwear, period care, hygiene, baby and wellness in India. COD and Razorpay ready.`,
+  icons: { icon: '/mark.svg', apple: '/mark.png' },
   openGraph: {
-    title: 'SakhiKart — India’s essentials marketplace',
-    description: 'Innerwear, period care, baby, hygiene and wellness. One cart, pan-India delivery.',
+    title: TITLE,
+    description: TAGLINE,
     type: 'website',
+    images: [{ url: '/logo.png' }],
   },
 };
 

@@ -17,7 +17,7 @@ export default function SellPage() {
       <main className="max-w-[900px] mx-auto px-4 md:px-10 py-14">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <span className="pill">Marketplace</span>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mt-5">Sell on SakhiKart</h1>
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mt-5">Sell on Body, Baby, Bloom</h1>
           <p className="text-ink-mute mt-4 text-lg max-w-2xl leading-relaxed">
             Today we list original house brands via dropship suppliers. Next, verified vendors can add products — Flipkart-style — with KYC, inventory, and payouts.
           </p>

@@ -55,7 +55,7 @@ export default function CheckoutPage() {
           key: result.razorpayKeyId,
           amount: result.total,
           currency: 'INR',
-          name: 'SakhiKart',
+          name: 'Body, Baby, Bloom',
           description: result.orderNumber,
           order_id: result.razorpayOrderId,
           handler: async (response: any) => {
@@ -190,7 +190,7 @@ export default function CheckoutPage() {
                 </div>
               ))}
               <div className="mt-4 flex gap-2">
-                <input value={coupon} onChange={e => setCoupon(e.target.value)} placeholder="SAKHI10" className="flex-1 border border-black/10 rounded-full px-4 py-2 text-sm outline-none" />
+                <input value={coupon} onChange={e => setCoupon(e.target.value)} placeholder="BLOOM10" className="flex-1 border border-black/10 rounded-full px-4 py-2 text-sm outline-none" />
                 <button onClick={applyCoupon} className="text-sm underline">Apply</button>
               </div>
               <div className="mt-4 space-y-2 text-sm">

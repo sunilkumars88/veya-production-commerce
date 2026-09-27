@@ -8,6 +8,7 @@ import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 import CartDrawer from '../components/CartDrawer';
 import { api } from '../lib/api';
+import { BRAND } from '../components/Logo';
 
 const CATEGORIES = [
   { name: 'Bras', slug: 'bras', color: 'from-[#7BBFB5] to-[#1A7A6E]' },
@@ -35,17 +36,18 @@ export default function Home() {
       <section className="px-4 md:px-10 py-12 md:py-20 max-w-[1280px] mx-auto grid lg:grid-cols-2 gap-10 items-center min-h-[72vh]">
         <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
           <span className="pill mb-5">India’s essentials marketplace</span>
-          <h1 className="text-[2.6rem] md:text-[4.6rem] font-bold leading-[1.05] tracking-tight mt-5">
-            Shop everything<br /><em className="font-serif text-teal italic font-semibold">she actually needs.</em>
+          <h1 className="text-[2.4rem] md:text-[4.2rem] font-bold leading-[1.08] tracking-tight mt-5">
+            Body, baby,<br /><em className="font-serif text-teal italic font-semibold">bloom.</em>
           </h1>
-          <p className="text-base md:text-lg text-ink-mute max-w-lg mt-6 leading-relaxed">
+          <p className="font-serif italic text-xl md:text-2xl text-ink mt-5">{BRAND.tagline}</p>
+          <p className="text-base md:text-lg text-ink-mute max-w-lg mt-4 leading-relaxed">
             Innerwear, period care, intimate hygiene, baby, and wellness — one cart, COD or Razorpay, dropship from partner warehouses.
           </p>
           <div className="flex flex-wrap gap-3 mt-8">
             <Link href="/collections/best-sellers" className="bg-teal text-white px-7 py-3.5 rounded-full inline-flex items-center gap-2 text-sm font-semibold shadow-glow">
               Shop now <ArrowRight size={16} />
             </Link>
-            <Link href="/sell" className="border border-teal/30 px-7 py-3.5 rounded-full text-sm font-medium text-teal hover:bg-teal/10">Sell on SakhiKart</Link>
+            <Link href="/sell" className="border border-teal/30 px-7 py-3.5 rounded-full text-sm font-medium text-teal hover:bg-teal/10">Sell with us</Link>
           </div>
           <div className="flex flex-wrap gap-5 mt-8 text-xs text-ink-mute">
             <span className="inline-flex items-center gap-1.5"><ShieldCheck size={14} /> Razorpay + COD</span>
@@ -53,12 +55,8 @@ export default function Home() {
             <span className="inline-flex items-center gap-1.5"><Store size={14} /> Vendor-ready</span>
           </div>
         </motion.div>
-        <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className="relative h-[48vh] md:h-[58vh] rounded-[28px] overflow-hidden bg-gradient-to-br from-[#2A9D8F] via-[#1A7A6E] to-[#0D3D38] shadow-silk">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(255,255,255,.28),transparent_42%)]" />
-          <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }} className="absolute bottom-8 left-8 right-8 text-white">
-            <p className="text-[11px] tracking-[.22em] uppercase text-white/70">Flipkart-style range · Calm Clearwave look</p>
-            <p className="font-serif italic text-3xl md:text-5xl mt-2">One marketplace. Many homes.</p>
-          </motion.div>
+        <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className="relative h-[42vh] md:h-[56vh] rounded-[28px] overflow-hidden bg-[#F4FAFA] border border-teal/10 shadow-silk flex items-center justify-center p-6">
+          <img src="/logo.png" alt={`${BRAND.name}. ${BRAND.tagline}`} className="w-full h-full object-contain" />
         </motion.div>
       </section>
 

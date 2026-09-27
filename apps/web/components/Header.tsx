@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Search, Heart, ShoppingBag, Menu, X, ChevronDown, Store } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getCart, cartCount } from '../lib/cart';
+import Logo, { BRAND } from './Logo';
 
 const NAV = [
   { label: 'Innerwear', href: '/category/innerwear', children: [
@@ -55,15 +56,13 @@ export default function Header({ onCartOpen }: { onCartOpen?: () => void }) {
 
   return (
     <>
-      <div className="bg-teal text-white text-center py-2 text-[11px] tracking-[.16em] font-medium">
-        FREE SHIPPING ABOVE ₹999 · COD · UPI · RAZORPAY · DROPSHIP READY
+      <div className="bg-teal text-white text-center py-2 px-3 text-[11px] md:text-xs font-medium">
+        {BRAND.tagline} <span className="hidden md:inline text-white/70"> · Free shipping above ₹999 · COD</span>
       </div>
       <header className={`sticky top-0 z-40 transition-all duration-500 ${scrolled ? 'bg-[#E8F4F2]/92 backdrop-blur-xl shadow-sm' : 'bg-[#E8F4F2]/80 backdrop-blur-md'}`}>
-        <div className="h-16 md:h-[72px] px-4 md:px-10 flex items-center justify-between max-w-[1280px] mx-auto">
-          <button className="lg:hidden p-2" onClick={() => setMobileOpen(true)} aria-label="Menu"><Menu size={22} /></button>
-          <Link href="/" className="text-xl md:text-2xl font-bold tracking-tight">
-            sakhi<span className="text-teal">kart</span>
-          </Link>
+        <div className="h-[72px] md:h-20 px-4 md:px-10 flex items-center justify-between max-w-[1280px] mx-auto gap-3">
+          <button className="lg:hidden p-2 shrink-0" onClick={() => setMobileOpen(true)} aria-label="Menu"><Menu size={22} /></button>
+          <Logo showTagline compact />
 
           <nav className="hidden lg:flex items-center gap-1 text-[15px] font-medium">
             {NAV.map(item => (
@@ -110,7 +109,7 @@ export default function Header({ onCartOpen }: { onCartOpen?: () => void }) {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 bg-black/40" onClick={() => setMobileOpen(false)}>
             <motion.nav initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }} className="w-[300px] h-full bg-[#F4FAFA] p-6 overflow-y-auto" onClick={e => e.stopPropagation()}>
               <div className="flex justify-between items-center mb-8">
-                <span className="text-xl font-bold">sakhi<span className="text-teal">kart</span></span>
+                <Logo href={undefined} compact />
                 <button onClick={() => setMobileOpen(false)} aria-label="Close"><X size={22} /></button>
               </div>
               {NAV.map(item => (
@@ -122,7 +121,7 @@ export default function Header({ onCartOpen }: { onCartOpen?: () => void }) {
                 </div>
               ))}
               <div className="mt-8 pt-4 border-t space-y-3 text-sm">
-                <Link href="/sell" onClick={() => setMobileOpen(false)}>Sell on SakhiKart</Link>
+                <Link href="/sell" onClick={() => setMobileOpen(false)}>Sell with us</Link>
                 <Link href="/account" onClick={() => setMobileOpen(false)}>My Account</Link>
                 <Link href="/admin" onClick={() => setMobileOpen(false)}>Admin</Link>
                 <Link href="/supplier" onClick={() => setMobileOpen(false)}>Supplier</Link>

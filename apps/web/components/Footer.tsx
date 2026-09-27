@@ -1,12 +1,13 @@
 import Link from 'next/link';
+import Logo, { BRAND } from './Logo';
 
 export default function Footer() {
   return (
     <footer className="bg-[#0D1E1C] text-white px-4 md:px-10 py-16 mt-8">
       <div className="max-w-[1280px] mx-auto grid md:grid-cols-4 gap-10">
         <div>
-          <p className="text-2xl font-bold mb-4">sakhi<span className="text-teal-light">kart</span></p>
-          <p className="text-white/55 text-sm leading-relaxed">India’s essentials marketplace — innerwear, period care, hygiene, baby and wellness. Dropship today. Vendors tomorrow.</p>
+          <Logo inverted showTagline />
+          <p className="text-white/55 text-sm leading-relaxed mt-4">Innerwear, period care, hygiene, baby and wellness. Dropship today. Vendors tomorrow.</p>
         </div>
         <div>
           <p className="text-xs tracking-[.18em] uppercase text-white/40 mb-4">Shop</p>
@@ -33,8 +34,8 @@ export default function Footer() {
           <p className="text-sm text-white/55">Razorpay · UPI · Cards · COD<br />Pan-India dropship fulfilment</p>
         </div>
       </div>
-      <div className="max-w-[1280px] mx-auto mt-12 pt-6 border-t border-white/10 flex flex-wrap justify-between text-xs text-white/40">
-        <span>© 2026 SakhiKart. Original catalogue. Not affiliated with listed competitor brands.</span>
+      <div className="max-w-[1280px] mx-auto mt-12 pt-6 border-t border-white/10 flex flex-wrap justify-between text-xs text-white/40 gap-2">
+        <span>© 2026 {BRAND.name}. Original catalogue.</span>
         <span>Made in India</span>
       </div>
     </footer>

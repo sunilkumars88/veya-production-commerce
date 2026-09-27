@@ -135,14 +135,14 @@ const COLLECTIONS = [
 ];
 
 async function main() {
-  console.log('Seeding SakhiKart marketplace...');
+  console.log('Seeding Body, Baby, Bloom marketplace...');
 
   const categoryMap: Record<string, string> = {};
   for (const cat of CATEGORIES) {
     const parent = await db.category.upsert({
       where: { slug: cat.slug },
       update: { name: cat.name },
-      create: { name: cat.name, slug: cat.slug, description: `Shop ${cat.name} on SakhiKart` },
+      create: { name: cat.name, slug: cat.slug, description: `Shop ${cat.name} on Body, Baby, Bloom` },
     });
     categoryMap[cat.slug] = parent.id;
     for (const child of cat.children) {
@@ -160,7 +160,7 @@ async function main() {
     const c = await db.collection.upsert({
       where: { slug: col.slug },
       update: { name: col.name },
-      create: { name: col.name, slug: col.slug, description: `${col.name} on SakhiKart` },
+      create: { name: col.name, slug: col.slug, description: `${col.name} on Body, Baby, Bloom` },
     });
     collectionMap[col.slug] = c.id;
   }
@@ -168,8 +168,8 @@ async function main() {
   const suppliers = await Promise.all([
     db.supplier.upsert({
       where: { id: 'sup-sakhikart-pl' },
-      update: { name: 'SakhiKart Private Label' },
-      create: { id: 'sup-sakhikart-pl', name: 'SakhiKart Private Label', email: 'pl@sakhikart.demo', qualityScore: 94, dispatchSlaDays: 1 },
+      update: { name: 'Body, Baby, Bloom Private Label' },
+      create: { id: 'sup-sakhikart-pl', name: 'Body, Baby, Bloom Private Label', email: 'pl@sakhikart.demo', qualityScore: 94, dispatchSlaDays: 1 },
     }),
     db.supplier.upsert({
       where: { id: 'sup-comfort-co' },
@@ -191,8 +191,8 @@ async function main() {
   for (const [code, city, state] of [['HYD', 'Hyderabad', 'Telangana'], ['BLR', 'Bangalore', 'Karnataka'], ['MUM', 'Mumbai', 'Maharashtra']] as const) {
     await db.warehouse.upsert({
       where: { code },
-      update: { name: `SakhiKart ${city}` },
-      create: { code, name: `SakhiKart ${city}`, city, state, postalCode: '500001', supplierId: suppliers[0].id },
+      update: { name: `Body, Baby, Bloom ${city}` },
+      create: { code, name: `Body, Baby, Bloom ${city}`, city, state, postalCode: '500001', supplierId: suppliers[0].id },
     });
   }
 
@@ -217,7 +217,7 @@ async function main() {
       create: {
         title: p.title,
         slug: p.slug,
-        description: `Original SakhiKart ${p.title.toLowerCase()} for everyday Indian homes. Made with ${p.fabric}. Dropship-ready with GST invoice support.`,
+        description: `Original Body, Baby, Bloom ${p.title.toLowerCase()} for everyday Indian homes. Made with ${p.fabric}. Dropship-ready with GST invoice support.`,
         shortDescription: p.fabric,
         fabric: p.fabric,
         material: p.fabric,
@@ -235,8 +235,8 @@ async function main() {
         newArrival: p.newArrival || false,
         hygieneRestricted: p.hygieneRestricted || false,
         returnEligible: !p.hygieneRestricted,
-        seoTitle: `${p.title} | SakhiKart`,
-        seoDescription: `Buy ${p.title} on SakhiKart — India's essentials marketplace.`,
+        seoTitle: `${p.title} | Body, Baby, Bloom`,
+        seoDescription: `Buy ${p.title} on Body, Baby, Bloom — India's essentials marketplace.`,
       },
     });
 
@@ -314,9 +314,9 @@ async function main() {
   }
 
   await db.coupon.upsert({
-    where: { code: 'SAKHI10' },
+    where: { code: 'BLOOM10' },
     update: { active: true },
-    create: { code: 'SAKHI10', type: 'PERCENT', value: 10, minOrder: 499, maxDiscount: 200 },
+    create: { code: 'BLOOM10', type: 'PERCENT', value: 10, minOrder: 499, maxDiscount: 200 },
   });
   await db.coupon.upsert({
     where: { code: 'FLAT100' },
@@ -326,8 +326,8 @@ async function main() {
 
   await db.user.upsert({
     where: { email: 'admin@sakhikart.demo' },
-    update: { name: 'SakhiKart Admin', role: 'SUPER_ADMIN' },
-    create: { email: 'admin@sakhikart.demo', name: 'SakhiKart Admin', role: 'SUPER_ADMIN', phone: '+919999999998' },
+    update: { name: 'Body, Baby, Bloom Admin', role: 'SUPER_ADMIN' },
+    create: { email: 'admin@sakhikart.demo', name: 'Body, Baby, Bloom Admin', role: 'SUPER_ADMIN', phone: '+919999999998' },
   });
 
   const customers = await Promise.all([
@@ -336,7 +336,8 @@ async function main() {
   ]);
 
   const settings = [
-    ['brand.name', 'SakhiKart', 'brand'],
+    ['brand.name', 'Body, Baby, Bloom', 'brand'],
+    ['brand.tagline', 'She changes. Baby grows. You still bloom.', 'brand'],
     ['brand.currency', 'INR', 'brand'],
     ['shipping.free_threshold', '999', 'shipping'],
     ['shipping.default_cost', '79', 'shipping'],
@@ -363,22 +364,22 @@ async function main() {
 
   await db.faq.deleteMany();
   const faqs = [
-    { question: 'What is SakhiKart?', answer: 'SakhiKart is an India-first marketplace for innerwear, period care, hygiene, baby, and wellness. We fulfil via dropshipping suppliers today and will open vendor onboarding next.', category: 'about' },
+    { question: 'What is Body, Baby, Bloom?', answer: 'Body, Baby, Bloom is an India-first marketplace for innerwear, period care, hygiene, baby, and wellness. Tagline: She changes. Baby grows. You still bloom. We fulfil via dropshipping today and will open vendor onboarding next.', category: 'about' },
     { question: 'How do payments work?', answer: 'Pay online with Razorpay (UPI, cards, netbanking) or choose COD on eligible pin codes. Live keys go in environment variables — mock checkout works in development.', category: 'payment' },
     { question: 'How long does delivery take?', answer: 'Most orders ship in 1–2 days from partner warehouses and arrive in 3–5 business days.', category: 'shipping' },
     { question: 'Can I return products?', answer: 'Eligible fashion items can be returned in 7 days unused with tags. Hygiene, period absorbents and opened personal care cannot be returned.', category: 'returns' },
-    { question: 'Can I sell on SakhiKart?', answer: 'Vendor onboarding is architected (supplier portal + scoring + blind shipping). Apply from Sell on SakhiKart — public listings open after KYC.', category: 'sellers' },
+    { question: 'Can I sell on Body, Baby, Bloom?', answer: 'Vendor onboarding is architected (supplier portal + scoring + blind shipping). Apply from Sell on Body, Baby, Bloom — public listings open after KYC.', category: 'sellers' },
   ];
   for (let i = 0; i < faqs.length; i++) {
     await db.faq.create({ data: { ...faqs[i], sort: i } });
   }
 
   const pages = [
-    { title: 'Privacy Policy', slug: 'privacy-policy', content: 'SakhiKart collects only what is needed to fulfil orders. Legal review required before production.' },
-    { title: 'Terms & Conditions', slug: 'terms', content: 'By using SakhiKart you agree to marketplace, dropship and payment terms. Legal review required.' },
+    { title: 'Privacy Policy', slug: 'privacy-policy', content: 'Body, Baby, Bloom collects only what is needed to fulfil orders. Legal review required before production.' },
+    { title: 'Terms & Conditions', slug: 'terms', content: 'By using Body, Baby, Bloom you agree to marketplace, dropship and payment terms. Legal review required.' },
     { title: 'Shipping Policy', slug: 'shipping-policy', content: 'Pan-India shipping. Free above ₹999. 3–5 business days typical.' },
     { title: 'Return Policy', slug: 'return-policy', content: '7-day returns on eligible unused items. Hygiene products excluded.' },
-    { title: 'Contact', slug: 'contact', content: 'support@sakhikart.demo · WhatsApp +91 99999 99999' },
+    { title: 'Contact', slug: 'contact', content: 'hello@bodybabybloom.demo · WhatsApp +91 99999 99999' },
   ];
   for (const page of pages) {
     await db.contentPage.upsert({ where: { slug: page.slug }, update: { content: page.content, title: page.title }, create: page });
@@ -388,7 +389,7 @@ async function main() {
   if (firstProduct) {
     await db.review.deleteMany({ where: { productId: firstProduct.id } });
     await db.review.create({
-      data: { productId: firstProduct.id, userId: customers[0].id, rating: 5, title: 'Daily essential', body: 'Soft, reliable and arrived quickly. Will reorder on SakhiKart.', verifiedPurchase: true, approved: true },
+      data: { productId: firstProduct.id, userId: customers[0].id, rating: 5, title: 'Daily essential', body: 'Soft, reliable and arrived quickly. Will reorder on Body, Baby, Bloom.', verifiedPurchase: true, approved: true },
     });
     await db.review.create({
       data: { productId: firstProduct.id, userId: customers[1].id, rating: 4, title: 'Great marketplace find', body: 'Good quality for the price. Checkout was simple.', verifiedPurchase: true, approved: true },
@@ -423,7 +424,7 @@ async function main() {
     }
   }
 
-  console.log(`Seed complete: ${PRODUCTS.length} products on SakhiKart.`);
+  console.log(`Seed complete: ${PRODUCTS.length} products on Body, Baby, Bloom.`);
 }
 
 main()

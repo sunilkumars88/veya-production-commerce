@@ -12,7 +12,7 @@ export interface CartItem {
   image?: string;
 }
 
-const CART_KEY = 'sakhikart_cart';
+const CART_KEY = 'bodybabybloom_cart';
 
 export function getCart(): CartItem[] {
   if (typeof window === 'undefined') return [];

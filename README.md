@@ -1,8 +1,8 @@
-# SakhiKart — India’s essentials marketplace
+# Body, Baby, Bloom
 
-Flipkart-style ecommerce for innerwear, period care, hygiene, baby, maternity and wellness.
+**She changes. Baby grows. You still bloom.**
 
-Original catalogue. Not affiliated with competitor brands. Clearwave-inspired mint/teal theme.
+India-first marketplace for innerwear, period care, hygiene, baby and wellness.
 
 ## Demo
 - Store: http://localhost:3000
@@ -11,7 +11,7 @@ Original catalogue. Not affiliated with competitor brands. Clearwave-inspired mi
 - Sell: http://localhost:3000/sell
 - API: http://localhost:4000/health
 
-Coupon: `SAKHI10`
+Coupons: `SAKHI10` · `BLOOM10`
 
 ## Run
 ```bash
@@ -22,14 +22,3 @@ npm run db:push
 npm run db:seed
 npm run dev
 ```
-
-## Launch payments
-Set `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, `RAZORPAY_WEBHOOK_SECRET`.
-Webhook: `POST /api/v1/webhooks/razorpay`
-
-## Dropshipping
-Paid order → assign supplier (admin) → supplier accept/pack/ship.
-Blind shipping is on by default.
-
-## Vendors
-Architecture is marketplace-ready (`Supplier`, scoring, portal). Public vendor listing opens after KYC via `/sell`.

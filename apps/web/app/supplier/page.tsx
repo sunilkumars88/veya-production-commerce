@@ -53,7 +53,7 @@ export default function SupplierPage() {
             <div className="flex gap-2">
               {x.status === 'PENDING' && <button onClick={() => act(x.id, 'accept')} className="bg-black text-white px-4 py-2 rounded-full text-sm">Accept</button>}
               {x.status === 'ACCEPTED' && <button onClick={() => act(x.id, 'packed')} className="bg-black text-white px-4 py-2 rounded-full text-sm flex items-center gap-1"><PackageCheck size={16} /> Packed</button>}
-              {x.status === 'PACKED' && <button onClick={() => act(x.id, 'shipped', { trackingNumber: `TRK-${Date.now()}`, carrier: 'SakhiKart Express' })} className="bg-teal text-white px-4 py-2 rounded-full text-sm flex items-center gap-1"><Truck size={16} /> Ship</button>}
+              {x.status === 'PACKED' && <button onClick={() => act(x.id, 'shipped', { trackingNumber: `TRK-${Date.now()}`, carrier: 'BBB Express' })} className="bg-teal text-white px-4 py-2 rounded-full text-sm flex items-center gap-1"><Truck size={16} /> Ship</button>}
             </div>
           </div>
         ))}
