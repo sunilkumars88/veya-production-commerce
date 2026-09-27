@@ -37,40 +37,37 @@ export default function Logo({
   const tag = inverted ? 'text-white/65' : 'text-ink-mute';
   const isHeader = variant === 'header';
 
-  const inner = (
-    <span className={`inline-flex items-center min-w-0 ${isHeader ? 'gap-3.5 md:gap-4' : 'gap-2.5'}`}>
-      {isHeader ? (
-        <img
-          src="/mark.png"
-          alt=""
-          className="h-14 w-14 md:h-[68px] md:w-[68px] object-contain shrink-0"
-        />
-      ) : (
-        <BloomMark size={compact ? 32 : 40} />
+  const inner = isHeader ? (
+    <span className="relative flex flex-col items-start leading-none select-none pr-1">
+      <span className="flex items-end gap-1.5 z-10 mb-[-3px] md:mb-[-5px]">
+        <span className="font-sticker font-extrabold text-[8px] md:text-[11px] bg-[#0D1E1C] text-white px-1.5 md:px-2.5 py-[3px] rounded-md -rotate-6 tracking-[0.12em] shadow-sm">
+          BODY
+        </span>
+        <span className="font-sticker font-extrabold text-[8px] md:text-[11px] bg-[#1A7A6E] text-white px-1.5 md:px-2.5 py-[3px] rounded-md rotate-[8deg] tracking-[0.12em] shadow-sm">
+          BABY
+        </span>
+      </span>
+      <span className="font-fun font-bold text-[2rem] md:text-[2.55rem] text-[#1A7A6E] tracking-[-0.03em] flex items-center drop-shadow-[0_1px_0_#fff]">
+        BLOOM
+        <span className="ml-1 text-[#E8B4B8] text-[1.05rem] md:text-[1.3rem] -rotate-12" aria-hidden>♥</span>
+      </span>
+      {showTagline && (
+        <span className="mt-1 max-w-[220px] md:max-w-none bg-[#0D1E1C] text-white font-sticker font-extrabold text-[7.5px] md:text-[10px] leading-tight px-2.5 py-1 rounded-full tracking-[0.01em]">
+          She changes. Baby grows. You still bloom.
+        </span>
       )}
-      <span className={`leading-none min-w-0 ${isHeader ? 'pt-0.5' : ''}`}>
-        {isHeader ? (
-          <>
-            <span className={`block font-logo font-medium tracking-[0.04em] text-[1.35rem] md:text-[1.7rem] ${title}`}>
-              body baby <span className={`${bloom} italic`}>bloom</span>
-            </span>
-            {showTagline && (
-              <span className={`block font-tagline italic text-[13px] md:text-[15px] tracking-[0.06em] mt-1 ${tag}`}>
-                {BRAND.tagline}
-              </span>
-            )}
-          </>
-        ) : (
-          <>
-            <span className={`block font-semibold tracking-tight ${compact ? 'text-[15px] md:text-lg' : 'text-lg md:text-xl'} ${title}`}>
-              body baby <span className={`${bloom} font-serif italic font-semibold`}>bloom</span>
-            </span>
-            {showTagline && (
-              <span className={`hidden sm:block text-[10px] md:text-[11px] tracking-[0.02em] mt-0.5 ${tag}`}>
-                {BRAND.tagline}
-              </span>
-            )}
-          </>
+    </span>
+  ) : (
+    <span className="inline-flex items-center gap-2.5 min-w-0">
+      <BloomMark size={compact ? 32 : 40} />
+      <span className="leading-tight min-w-0">
+        <span className={`block font-semibold tracking-tight ${compact ? 'text-[15px] md:text-lg' : 'text-lg md:text-xl'} ${title}`}>
+          body baby <span className={`${bloom} font-serif italic font-semibold`}>bloom</span>
+        </span>
+        {showTagline && (
+          <span className={`hidden sm:block text-[10px] md:text-[11px] tracking-[0.02em] mt-0.5 ${tag}`}>
+            {BRAND.tagline}
+          </span>
         )}
       </span>
     </span>

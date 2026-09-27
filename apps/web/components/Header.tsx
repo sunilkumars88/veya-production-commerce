@@ -60,7 +60,7 @@ export default function Header({ onCartOpen }: { onCartOpen?: () => void }) {
         {BRAND.tagline} <span className="hidden md:inline text-white/70"> · Free shipping above ₹999 · COD</span>
       </div>
       <header className={`sticky top-0 z-40 transition-all duration-500 ${scrolled ? 'bg-[#E8F4F2]/92 backdrop-blur-xl shadow-sm' : 'bg-[#E8F4F2]/80 backdrop-blur-md'}`}>
-        <div className="h-[84px] md:h-[92px] px-4 md:px-10 flex items-center justify-between max-w-[1280px] mx-auto gap-3">
+        <div className="h-[100px] md:h-[112px] px-4 md:px-10 flex items-center justify-between max-w-[1280px] mx-auto gap-3">
           <button className="lg:hidden p-2 shrink-0" onClick={() => setMobileOpen(true)} aria-label="Menu"><Menu size={22} /></button>
           <Logo variant="header" showTagline />
 
