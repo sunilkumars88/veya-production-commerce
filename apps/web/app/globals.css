@@ -37,6 +37,8 @@ button, a { transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
 
 .font-serif { font-family: 'Playfair Display', Georgia, serif; }
 .font-display { font-family: 'DM Sans', sans-serif; }
+.font-logo { font-family: 'Bodoni Moda', 'Times New Roman', serif; }
+.font-tagline { font-family: 'Cormorant Garamond', Georgia, serif; }
 
 .pill {
   display: inline-flex;

@@ -24,27 +24,53 @@ export default function Logo({
   showTagline = false,
   compact = false,
   inverted = false,
+  variant = 'default',
 }: {
   href?: string;
   showTagline?: boolean;
   compact?: boolean;
   inverted?: boolean;
+  variant?: 'default' | 'header';
 }) {
   const title = inverted ? 'text-white' : 'text-ink';
   const bloom = inverted ? 'text-teal-light' : 'text-teal';
   const tag = inverted ? 'text-white/65' : 'text-ink-mute';
+  const isHeader = variant === 'header';
 
   const inner = (
-    <span className="inline-flex items-center gap-2.5 min-w-0">
-      <BloomMark size={compact ? 32 : 40} />
-      <span className="leading-tight min-w-0">
-        <span className={`block font-semibold tracking-tight ${compact ? 'text-[15px] md:text-lg' : 'text-lg md:text-xl'} ${title}`}>
-          body baby <span className={`${bloom} font-serif italic font-semibold`}>bloom</span>
-        </span>
-        {showTagline && (
-          <span className={`hidden sm:block text-[10px] md:text-[11px] tracking-[0.02em] mt-0.5 ${tag}`}>
-            {BRAND.tagline}
-          </span>
+    <span className={`inline-flex items-center min-w-0 ${isHeader ? 'gap-3.5 md:gap-4' : 'gap-2.5'}`}>
+      {isHeader ? (
+        <img
+          src="/mark.png"
+          alt=""
+          className="h-14 w-14 md:h-[68px] md:w-[68px] object-contain shrink-0"
+        />
+      ) : (
+        <BloomMark size={compact ? 32 : 40} />
+      )}
+      <span className={`leading-none min-w-0 ${isHeader ? 'pt-0.5' : ''}`}>
+        {isHeader ? (
+          <>
+            <span className={`block font-logo font-medium tracking-[0.04em] text-[1.35rem] md:text-[1.7rem] ${title}`}>
+              body baby <span className={`${bloom} italic`}>bloom</span>
+            </span>
+            {showTagline && (
+              <span className={`block font-tagline italic text-[13px] md:text-[15px] tracking-[0.06em] mt-1 ${tag}`}>
+                {BRAND.tagline}
+              </span>
+            )}
+          </>
+        ) : (
+          <>
+            <span className={`block font-semibold tracking-tight ${compact ? 'text-[15px] md:text-lg' : 'text-lg md:text-xl'} ${title}`}>
+              body baby <span className={`${bloom} font-serif italic font-semibold`}>bloom</span>
+            </span>
+            {showTagline && (
+              <span className={`hidden sm:block text-[10px] md:text-[11px] tracking-[0.02em] mt-0.5 ${tag}`}>
+                {BRAND.tagline}
+              </span>
+            )}
+          </>
         )}
       </span>
     </span>
